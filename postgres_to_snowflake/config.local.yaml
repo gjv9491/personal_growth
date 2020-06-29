@@ -1,0 +1,423 @@
+action:
+  - system: tables
+    tables:
+      - monster.students
+      - investor_relations.universities
+      - investor_relations.offerings
+      - investor_relations.verticals
+      - investor_relations.schools
+  - system: select_query_ods
+    query:
+      tbl_{{ table }} : select * from {{ table }} limit 10;
+  - system: ods
+    query:
+      #excluded_courses: copy (SELECT * FROM investor_relations.excluded_courses) TO STDOUT WITH (FORMAT csv, DELIMITER '|', QUOTE '^', HEADER False);
+      #monster_enrollments: copy (SELECT * FROM monster.enrollments) TO STDOUT WITH (FORMAT csv, DELIMITER '|', QUOTE '^', HEADER False);
+      #monster_students: copy (SELECT * FROM monster.students) TO STDOUT WITH (FORMAT csv, HEADER False);
+      #universities: copy (SELECT * FROM investor_relations.universities) TO STDOUT WITH (FORMAT csv, DELIMITER '|', QUOTE '^', HEADER False);
+      #verticals: copy (SELECT * FROM investor_relations.verticals) TO STDOUT WITH (FORMAT csv, DELIMITER '|', QUOTE '^', HEADER False);
+      #schools: copy (SELECT * FROM investor_relations.schools) TO STDOUT WITH (FORMAT csv, DELIMITER '|', QUOTE '^', HEADER False);
+      #programs: copy (SELECT * FROM investor_relations.programs) TO STDOUT WITH (FORMAT csv, DELIMITER '|', QUOTE '^', HEADER False);
+      #offerings: copy (SELECT * FROM investor_relations.offerings) TO STDOUT WITH (FORMAT csv, DELIMITER '|', QUOTE '^', HEADER False);
+      ##SELECT count(*)  FROM investor_relations.universities limit 10;
+  - system: snowflake
+    query:
+#      drop_students:
+#        DROP TABLE IF EXISTS investor_relations.students;
+#      students:
+#        CREATE TABLE investor_relations.students (
+#        account_id varchar(40) NULL,
+#        admissions_counselor varchar NULL,
+#        admit_bottoms_up varchar NULL,
+#        admitted int NULL,
+#        admitted_date date NULL,
+#        advanced_standing_qualified varchar NULL,
+#        advisor varchar NULL,
+#        all_official_transcripts_received varchar NULL,
+#        app_cohort varchar NULL,
+#        app_contact_type varchar NULL,
+#        app_contact_type_datetime timestamp NULL,
+#        app_degree varchar NULL,
+#        app_do_not_call int NULL,
+#        app_do_not_record int NULL,
+#        app_email varchar NULL,
+#        app_email_opt_out int NULL,
+#        app_ip_inferred_country varchar NULL,
+#        app_legally_restricted_area int NULL,
+#        application_advisor varchar NULL,
+#        application_advisor_comments varchar NULL,
+#        application_completed int NULL,
+#        application_completed_date timestamp NULL,
+#        application_engaged int NULL,
+#        application_engaged_date timestamp NULL,
+#        application_fee_paid_date timestamp NULL,
+#        application_fee_waiver_decision varchar NULL,
+#        application_phase varchar NULL,
+#        application_started int NULL,
+#        application_started_date timestamp NULL,
+#        application_status varchar NULL,
+#        application_submitted int NULL,
+#        application_submitted_date timestamp NULL,
+#        app_login_interval float8 NULL,
+#        appointment_date_app date NULL,
+#        appointment_date_lead date NULL,
+#        app_owner varchar NULL,
+#        app_quarantine_status varchar NULL,
+#        app_share_attempted int NULL,
+#        app_temperature varchar NULL,
+#        app_trying_attempt_count int NULL,
+#        app_work_experience float8 NULL,
+#        bad_lead varchar NULL,
+#        bad_lead_date date NULL,
+#        bad_lead_reason varchar NULL,
+#        billingcity varchar NULL,
+#        billingcountry varchar NULL,
+#        billingpostalcode varchar NULL,
+#        billingstate varchar NULL,
+#        birthdate date NULL,
+#        bsn varchar NULL,
+#        cadence varchar NULL,
+#        cadence_reason varchar NULL,
+#        cohort varchar NULL,
+#        communication_segment varchar NULL,
+#        complete_bottoms_up varchar NULL,
+#        completed_course_names varchar NULL,
+#        completed_credits float8 NULL,
+#        concentration varchar NULL,
+#        conditional_admit text NULL,
+#        contact_id varchar(40) NULL,
+#        contact_type varchar NULL,
+#        contact_type_datetime timestamp NULL,
+#        counselor varchar NULL,
+#        country varchar NULL,
+#        country_of_citizenship varchar NULL,
+#        created_date timestamp NULL,
+#        createddate_account timestamp NULL,
+#        createddate_lead timestamp NULL,
+#        createddate_opportunity timestamp NULL,
+#        creative_id varchar NULL,
+#        creator_version varchar NULL,
+#        cumulative_undergrad_gpa float8 NULL,
+#        current_cohort varchar NULL,
+#        current_course_names varchar NULL,
+#        current_credits float8 NULL,
+#        current_semester varchar NULL,
+#        current_term_start_date date NULL,
+#        date_potentially_complete timestamp NULL,
+#        decline_date date NULL,
+#        decline_reason varchar NULL,
+#        "degree" varchar NULL,
+#        degree_conferral_date date NULL,
+#        degree_honors_lead varchar NULL,
+#        degree_offering varchar NULL,
+#        denied_student int NULL,
+#        deny_date timestamp NULL,
+#        deposit_date timestamp NULL,
+#        "domain" varchar(20) NULL,
+#        domestic_international varchar NULL,
+#        do_not_call int NULL,
+#        dupe int NULL,
+#        ef_id varchar NULL,
+#        email_opt_out int NULL,
+#        enroll_bottoms_up varchar NULL,
+#        enrolled int NULL,
+#        enrolled_cohort varchar NULL,
+#        enrolled_date date NULL,
+#        ers_application_status varchar NULL,
+#        essays_acceptable varchar NULL,
+#        final_decision varchar NULL,
+#        final_decision_date date NULL,
+#        first_call_date timestamp NULL,
+#        first_call_interval float8 NULL,
+#        first_name varchar NULL,
+#        funding_status varchar NULL,
+#        gender varchar NULL,
+#        general_application_notes varchar NULL,
+#        graduate_gpa float8 NULL,
+#        graduation_date date NULL,
+#        gre_quant float8 NULL,
+#        gre_quant_percentile int NULL,
+#        gre_verbal int NULL,
+#        gre_writing float8 NULL,
+#        gre_writing_percentile float8 NULL,
+#        ignition_one_id varchar NULL,
+#        industry text NULL,
+#        inorganic_register_bottoms_up varchar NULL,
+#        intent_to_enroll varchar NULL,
+#        isdeleted int NULL,
+#        ite_sent_date timestamp NULL,
+#        landing_page varchar NULL,
+#        last_activity_date date NULL,
+#        last_app_access_date timestamp NULL,
+#        last_modified_date timestamp NULL,
+#        last_phone_call_datetime date NULL,
+#        lead_citizenship_status varchar NULL,
+#        lead_degree_interest varchar NULL,
+#        lead_degree_offering varchar NULL,
+#        lead_do_not_record int NULL,
+#        lead_english_ability varchar NULL,
+#        lead_id varchar(40) NULL,
+#        lead_ip_inferred_country varchar NULL,
+#        lead_legally_restricted_area int NULL,
+#        lead_number varchar NULL,
+#        lead_owner varchar NULL,
+#        lead_qualified varchar NULL,
+#        lead_re_request_counter int NULL,
+#        lead_re_request_date_time timestamp NULL,
+#        lead_re_request_lead_source varchar NULL,
+#        lead_share_opt_in varchar NULL,
+#        lead_share_source varchar NULL,
+#        lead_share_source_id varchar NULL,
+#        lead_source varchar NULL,
+#        lead_temperature varchar NULL,
+#        lead_track varchar NULL,
+#        lead_undergraduate_grade_percentage varchar NULL,
+#        level_of_education varchar NULL,
+#        military_affiliated varchar NULL,
+#        military_status varchar NULL,
+#        next_outreach_date_time timestamp NULL,
+#        not_shared_marketing_automation varchar NULL,
+#        offering_id text NULL,
+#        official_cohort varchar(30) NULL,
+#        official_transcripts_received int NULL,
+#        opportunity_id varchar(40) NULL,
+#        organic_register_bottoms_up varchar NULL,
+#        original_lead_share_source varchar NULL,
+#        owner_id varchar(40) NULL,
+#        personal_information_status float8 NULL,
+#        personmailingcity varchar NULL,
+#        personmailingcountry varchar NULL,
+#        personmailingpostalcode varchar NULL,
+#        personmailingstate varchar NULL,
+#        preferred_placement_zip varchar NULL,
+#        program_information_status float8 NULL,
+#        program_length varchar NULL,
+#        program_track varchar NULL,
+#        prospect_cohort varchar NULL,
+#        prospect_degree varchar NULL,
+#        prospect_share_campaign varchar(10) NULL,
+#        prospect_state varchar NULL,
+#        prospect_work_experience float8 NULL,
+#        quarantine_status varchar NULL,
+#        race varchar NULL,
+#        registered int NULL,
+#        registered_date date NULL,
+#        registered_nurse varchar NULL,
+#        resume_acceptable varchar NULL,
+#        revised_cohort varchar NULL,
+#        send_id varchar NULL,
+#        send_wework_agreement int NULL,
+#        shippingcity varchar NULL,
+#        shippingcountry varchar NULL,
+#        shippingpostalcode varchar NULL,
+#        shippingstate varchar NULL,
+#        sop_acceptable varchar NULL,
+#        splash_creative varchar NULL,
+#        state varchar(10) NULL,
+#        stated_gpa_range float8 NULL,
+#        status varchar NULL,
+#        student_do_not_record int NULL,
+#        student_owner varchar NULL,
+#        student_type varchar NULL,
+#        submit_bottoms_up varchar NULL,
+#        systemmodstamp_account timestamp NULL,
+#        systemmodstamp_lead timestamp NULL,
+#        systemmodstamp_opportunity timestamp NULL,
+#        test_taken varchar NULL,
+#        toefl_listening float8 NULL,
+#        toefl_reading float8 NULL,
+#        toefl_speaking float8 NULL,
+#        toefl_writing float8 NULL,
+#        total_application_items_count int NULL,
+#        total_application_items_received int NULL,
+#        total_completed_courses int NULL,
+#        total_current_courses int NULL,
+#        total_transcripts_needed int NULL,
+#        total_transcripts_received int NULL,
+#        transcript_details varchar NULL,
+#        transfer_credits float8 NULL,
+#        transfer_student int NULL,
+#        trying_attempt_count int NULL,
+#        undergrad_degree varchar NULL,
+#        undergrad_gpa float8 NULL,
+#        undergrad_school varchar NULL,
+#        university_id varchar NULL,
+#        unofficial_transcripts_received int NULL,
+#        uuid varchar(80) NULL,
+#        visiting_student int NULL,
+#        will_not_apply_reason varchar NULL,
+#        will_not_complete_reason varchar NULL,
+#        work_experience float8 NULL,
+#        years_of_programming_experience varchar NULL,
+#        zip_code varchar NULL
+#        );
+#      drop_excluded_courses:
+#        DROP TABLE IF EXISTS investor_relations.excluded_courses;
+#      excluded_courses:
+#        CREATE TABLE investor_relations.excluded_courses (
+#        course_name varchar(100) NULL,
+#        course_title varchar(200) NULL,
+#        degree_offering varchar(20) NULL,
+#        date_added timestamp NULL
+#        );
+#
+#      drop_monster_enrollments:
+#        DROP TABLE IF EXISTS investor_relations.enrollments;
+#      monster_enrollments:
+#        CREATE TABLE investor_relations.enrollments (
+#        enrollmentid varchar(40) NULL,
+#        enrollment_systemmodstamp timestamp NULL,
+#        enrollment_slug varchar(290) NULL,
+#        account_id varchar(40) NULL,
+#        credits float8 NULL,
+#        status varchar(60) NULL,
+#        semester varchar(30) NULL,
+#        section_systemmodstamp timestamp NULL,
+#        section_id varchar(40) NULL,
+#        start_date date NULL,
+#        end_date date NULL,
+#        section_code varchar(90) NULL,
+#        courseid varchar(40) NULL,
+#        isdeleted boolean NULL,
+#        createddate timestamp NULL,
+#        lastmodifieddate timestamp NULL,
+#        degree_offering varchar(20) NULL,
+#        course_name varchar(160) NULL,
+#        course_title varchar(210) NULL,
+#        course_code varchar(100) NULL,
+#        credits_crs float8 NULL,
+#        course_systemmodstamp timestamp NULL,
+#        course_type varchar(20) NULL,
+#        "domain" varchar(20) NULL,
+#        coursetype varchar(20) NULL,
+#        termcode_date date NULL,
+#        term_source varchar(30) NULL
+#        );
+      use_cmd: USE SCHEMA "GLOBAL_BI_SANDBOX"."INVESTOR_RELATIONS";
+      put_schools: PUT file://monster_enrollments.csv @INVESTOR_RELATIONS_STAGE/monster_enrollments;
+#      copy_schools:
+#        COPY INTO "GLOBAL_BI_SANDBOX"."INVESTOR_RELATIONS"."ENROLLMENTS"
+#        FROM @INVESTOR_RELATIONS_STAGE/monster_students ON_ERROR = 'ABORT_STATEMENT' PURGE = TRUE;
+
+#      offerings:
+#        CREATE TABLE investor_relations.offerings (
+#        offering varchar(230) NULL,
+#        university int NULL,
+#        vertical int NULL,
+#        id int NOT NULL,
+#        "program" int NULL,
+#        announcement_date date NULL,
+#        launch_date date NULL,
+#        placement boolean NULL DEFAULT false,
+#        is_published boolean NOT NULL DEFAULT false,
+#        CONSTRAINT offerings_pkey PRIMARY KEY (id)
+#        );
+#      alter_offerings_program:
+#        ALTER TABLE investor_relations.offerings ADD CONSTRAINT "program" FOREIGN KEY ("program") REFERENCES investor_relations.programs(id);
+#      alter_offerings_university:
+#        ALTER TABLE investor_relations.offerings ADD CONSTRAINT university FOREIGN KEY (university) REFERENCES investor_relations.universities(id);
+#      alter_offerings_vertical:
+#        ALTER TABLE investor_relations.offerings ADD CONSTRAINT vertical FOREIGN KEY (vertical) REFERENCES investor_relations.verticals(id);
+#      use_cmd: USE SCHEMA "GLOBAL_BI_SANDBOX"."INVESTOR_RELATIONS";
+#      put_schools: PUT file://offerings.csv @INVESTOR_RELATIONS_STAGE/temp_offerings;
+#      copy_schools:
+#        COPY INTO "GLOBAL_BI_SANDBOX"."INVESTOR_RELATIONS"."OFFERINGS"
+#        FROM @INVESTOR_RELATIONS_STAGE/temp_offerings FILE_FORMAT = '"GLOBAL_BI_SANDBOX"."INVESTOR_RELATIONS"."CSV_FORMAT"'
+#        ON_ERROR = 'ABORT_STATEMENT' PURGE = TRUE;
+#
+#
+#        #      drop_offerings:
+#        DROP TABLE IF EXISTS investor_relations.offerings;
+#      offerings:
+#        CREATE TABLE investor_relations.offerings (
+#        offering varchar(230) NULL,
+#        university int NULL,
+#        vertical int NULL,
+#        id int NOT NULL,
+#        "program" int NULL,
+#        announcement_date date NULL,
+#        launch_date date NULL,
+#        placement boolean NULL DEFAULT false,
+#        CONSTRAINT offerings_pkey PRIMARY KEY (id)
+#        );
+#      alter_offerings_program:
+#        ALTER TABLE investor_relations.offerings ADD CONSTRAINT program FOREIGN KEY (program) REFERENCES investor_relations.programs(id);
+#      alter_offerings_university:
+#        ALTER TABLE investor_relations.offerings ADD CONSTRAINT university FOREIGN KEY (university) REFERENCES investor_relations.universities(id);
+#      alter_offerings_vertical:
+#        ALTER TABLE investor_relations.offerings ADD CONSTRAINT vertical FOREIGN KEY (vertical) REFERENCES investor_relations.verticals(id);
+#      drop_programs:
+#        DROP TABLE IF EXISTS investor_relations.programs;
+#      programs:
+#        CREATE TABLE investor_relations.programs (
+#        "program" varchar(80) NULL,
+#        university int NULL,
+#        school int NULL,
+#        launch_date varchar(30) NULL,
+#        id int NOT NULL,
+#        date_launch date NULL,
+#        announcement_date date NULL,
+#        placement boolean NULL,
+#        CONSTRAINT programs_pkey PRIMARY KEY (id)
+#        );
+#      alter_programs_school:
+#        ALTER TABLE investor_relations.programs ADD CONSTRAINT school FOREIGN KEY (school) REFERENCES investor_relations.schools(id);
+#      alter_programs_university:
+#        ALTER TABLE investor_relations.programs ADD CONSTRAINT university FOREIGN KEY (university) REFERENCES investor_relations.universities(id);
+#      drop_schools:
+#        DROP TABLE IF EXISTS investor_relations.schools;
+#      schools:
+#        CREATE TABLE investor_relations.schools (
+#        school varchar(330) NULL,
+#        university_id int NULL,
+#        id int NOT NULL,
+#        CONSTRAINT schools_pkey PRIMARY KEY (id)
+#        );
+#      alter_schools:
+#        ALTER TABLE investor_relations.schools ADD CONSTRAINT university FOREIGN KEY (university_id) REFERENCES investor_relations.universities(id);
+#      drop_verticals: DROP TABLE IF EXISTS investor_relations.verticals;
+#      verticals:
+#        CREATE TABLE investor_relations.verticals (
+#        vertical varchar(50) NULL,
+#        id int NOT NULL,
+#        vertical_launch_date date NULL,
+#        mpv_date date NULL,
+#        CONSTRAINT verticals_pkey PRIMARY KEY (id)
+#        );
+#      put_verticals: PUT file://<file_path>/verticals.csv @VERTICALS/ui1593018585317
+#      copy_universities:
+#       COPY INTO "GLOBAL_BI_SANDBOX"."INVESTOR_RELATIONS"."VERTICALS" FROM @/ui1593018585317
+#        FILE_FORMAT = '"GLOBAL_BI_SANDBOX"."INVESTOR_RELATIONS"."CSV_FORMAT"'
+#        ON_ERROR = 'ABORT_STATEMENT' PURGE = TRUE;
+#       drop_universities: DROP TABLE IF EXISTS INVESTOR_RELATIONS.universities;
+#      universities:
+#        CREATE TABLE INVESTOR_RELATIONS.universities (
+#        universities varchar(90) NULL,
+#        id int NOT NULL,
+#        city varchar(30) NULL,
+#        state varchar(10) NULL,
+#        country varchar(10) NULL,
+#        longitude varchar(30) NULL,
+#        latitude varchar(20) NULL,
+#        ipeds_id int NULL,
+#        zip_code varchar(20) NULL,
+#        CONSTRAINT universities_pkey PRIMARY KEY (id)
+#        );
+
+
+
+
+
+      #create_local_stage: CREATE STAGE "GLOBAL_BI_SANDBOX"."INVESTOR_RELATIONS".INVESTOR_RELATIONS_STAGE;
+      #put_universities: put file://universities.csv @INVESTOR_RELATIONS_STAGE;
+
+      #copy_universities: COPY INTO "GLOBAL_BI_SANDBOX"."IR"."UNIVERSITIES"
+      #  FROM @INVESTOR_RELATIONS_STAGE/universities.csv.gz
+        #ON_ERROR = 'ABORT_STATEMENT' SKIP_HEADER=1 FIELD_DELIMITER='|' PURGE = TRUE;
+      #put file://filename.csv @TEMP_STAGE;
+      #COPY INTO "GLOBAL_BI_SANDBOX"."IR"."UNIVERSITIES" FROM @IR/filename.csv ON_ERROR = 'ABORT_STATEMENT' PURGE = TRUE;
+
+#PUT file://<file_path>/universities.csv @UNIVERSITIES/ui1593017648887
+
+#COPY INTO "GLOBAL_BI_SANDBOX"."INVESTOR_RELATIONS"."UNIVERSITIES" FROM @/ui1593017648887 FILE_FORMAT = '"GLOBAL_BI_SANDBOX"."INVESTOR_RELATIONS"."CSV_FORMAT"' ON_ERROR = 'ABORT_STATEMENT' PURGE = TRUE;
+
