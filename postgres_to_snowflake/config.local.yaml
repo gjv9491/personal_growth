@@ -1,0 +1,30 @@
+action:
+  - system: tables
+    tables:
+      - students
+  - system: select_query_postgres
+    query:
+      tbl_{{ table }} : select * from {{ table }} limit 10;
+  - system: prod
+    query:
+      student: copy (SELECT * FROM student) TO STDOUT WITH (FORMAT csv, DELIMITER '|', QUOTE '^', HEADER False);
+  - system: stage_snowflake
+    query:
+      drop_students:
+        DROP TABLE IF EXISTS students;
+      students:
+        CREATE TABLE students (
+        account_id varchar(40) NULL,
+        firstname varchar NULL,
+        lastname varchar NULL,
+        email varchar NULL,
+        CONSTRAINT offerings_pkey PRIMARY KEY (id)
+        );
+      alter_offerings_program:
+        ALTER TABLE student ADD CONSTRAINT "program" FOREIGN KEY ("program") REFERENCES programs(id);
+      use_cmd: USE SCHEMA "<dbname>"."<schemaname>";
+      put_schools: PUT file://student.csv @<schemname>_STAGE/student;
+      copy_schools:
+        COPY INTO "<dbname>"."<schemaname>"."student"
+        FILE_FORMAT = '"<dbname>"."<schemaname>"."CSV"'
+        FROM @<schemname>_STAGE/student ON_ERROR = 'ABORT_STATEMENT' PURGE = TRUE;
