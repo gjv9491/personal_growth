@@ -1,1 +1,8 @@
 # Created by .ignore support plugin (hsz.mobi)
+/postgres_to_snowflake/config.yaml
+.DS_Store
+.idea/*
+BarnRaiseIR.sql
+postgres_to_snowflake/.idea/*
+postgres_to_snowflake/logfile
+postgres_to_snowflake/postgresql/
