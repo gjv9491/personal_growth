@@ -4,7 +4,7 @@ azure-core==1.6.0
 azure-storage-blob==12.3.2
 boto3==1.13.26
 botocore==1.16.26
-certifi==2018.8.24
+certifi==2022.12.7
 cffi==1.13.2
 chardet==3.0.4
 clang==6.0.0.2
